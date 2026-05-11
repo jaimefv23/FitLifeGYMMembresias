@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  * @author Jaime
  */
-public class SuscripcionUsuarioMembresia {
+public class Suscripcion {
     
     private Long idSuscripcion;
     private Long idUsuario;
@@ -20,10 +20,10 @@ public class SuscripcionUsuarioMembresia {
     private Float precioPagado;
     private Estado estado;
 
-    public SuscripcionUsuarioMembresia() {
+    public Suscripcion() {
     }
 
-    public SuscripcionUsuarioMembresia(Long idUsuario, Long idMembresia, LocalDate fechaInicio, LocalDate fechaVencimiento, Float precioPagado, Estado estado) {
+    public Suscripcion(Long idUsuario, Long idMembresia, LocalDate fechaInicio, LocalDate fechaVencimiento, Float precioPagado, Estado estado) {
         this.idUsuario = idUsuario;
         this.idMembresia = idMembresia;
         this.fechaInicio = fechaInicio;
@@ -32,7 +32,7 @@ public class SuscripcionUsuarioMembresia {
         this.estado = estado;
     }
 
-    public SuscripcionUsuarioMembresia(Long idSuscripcion, Long idUsuario, Long idMembresia, LocalDate fechaInicio, LocalDate fechaVencimiento, Float precioPagado, Estado estado) {
+    public Suscripcion(Long idSuscripcion, Long idUsuario, Long idMembresia, LocalDate fechaInicio, LocalDate fechaVencimiento, Float precioPagado, Estado estado) {
         this.idSuscripcion = idSuscripcion;
         this.idUsuario = idUsuario;
         this.idMembresia = idMembresia;

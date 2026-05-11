@@ -8,6 +8,6 @@ package com.mycompany.fitlifegym_persistencia;
  *
  * @author Jaime
  */
-public class SuscripcionUsuarioMembresiaDAO {
+public class UsuarioDAO {
     
 }

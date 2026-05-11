@@ -17,6 +17,7 @@ public class Membresia {
     private Estado estado;
     private List<String> beneficios;
     private LocalDate fechaCreacion;
+    private PeriodoMembresia periodo;
 
     public Membresia() {
     }
@@ -30,7 +31,7 @@ public class Membresia {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Membresia(Long idMembresia, String nombre, Imagen imagen, Float precio, Estado estado, List<String> beneficios, LocalDate fechaCreacion) {
+    public Membresia(Long idMembresia, String nombre, Imagen imagen, Float precio, Estado estado, List<String> beneficios, LocalDate fechaCreacion, PeriodoMembresia periodo) {
         this.idMembresia = idMembresia;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -38,7 +39,10 @@ public class Membresia {
         this.estado = estado;
         this.beneficios = beneficios;
         this.fechaCreacion = fechaCreacion;
+        this.periodo = periodo;
     }
+
+    
 
     public Long getIdMembresia() {
         return idMembresia;
@@ -96,8 +100,17 @@ public class Membresia {
         this.fechaCreacion = fechaCreacion;
     }
 
+    public PeriodoMembresia getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(PeriodoMembresia periodo) {
+        this.periodo = periodo;
+    }
+
     @Override
     public String toString() {
-        return "Membresia{" + "idMembresia=" + idMembresia + ", nombre=" + nombre + ", imagen=" + imagen + ", precio=" + precio + ", estado=" + estado + ", beneficios=" + beneficios + ", fechaCreacion=" + fechaCreacion + '}';
+        return "Membresia{" + "idMembresia=" + idMembresia + ", nombre=" + nombre + ", imagen=" + imagen + ", precio=" + precio + ", estado=" + estado + ", beneficios=" + beneficios + ", fechaCreacion=" + fechaCreacion + ", periodo=" + periodo + '}';
     }
+
 }

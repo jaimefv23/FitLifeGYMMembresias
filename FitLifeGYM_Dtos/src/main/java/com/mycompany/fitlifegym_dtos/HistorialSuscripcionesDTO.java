@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.fitlifegym_persistencia.entidades;
+package com.mycompany.fitlifegym_dtos;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,31 +11,21 @@ import java.util.List;
  *
  * @author Jaime
  */
-public class HistorialSuscripcionesMembresias {
+public class HistorialSuscripcionesDTO {
     
     private Long idHistorialSuscripcion;
     private Long idUsuario;
     private Long idMembresia;
-    private List<Suscripcion> suscripciones;
+    private List<SuscripcionDTO> suscripciones;
     private Float precioPagado;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private LocalDate fechaVencimiento;
 
-    public HistorialSuscripcionesMembresias() {
+    public HistorialSuscripcionesDTO() {
     }
 
-    public HistorialSuscripcionesMembresias(Long idUsuario, Long idMembresia, List<Suscripcion> suscripciones, Float precioPagado, LocalDate fechaInicio, LocalDate fechaFin, LocalDate fechaVencimiento) {
-        this.idUsuario = idUsuario;
-        this.idMembresia = idMembresia;
-        this.suscripciones = suscripciones;
-        this.precioPagado = precioPagado;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public HistorialSuscripcionesMembresias(Long idHistorialSuscripcion, Long idUsuario, Long idMembresia, List<Suscripcion> suscripciones, Float precioPagado, LocalDate fechaInicio, LocalDate fechaFin, LocalDate fechaVencimiento) {
+    public HistorialSuscripcionesDTO(Long idHistorialSuscripcion, Long idUsuario, Long idMembresia, List<SuscripcionDTO> suscripciones, Float precioPagado, LocalDate fechaInicio, LocalDate fechaFin, LocalDate fechaVencimiento) {
         this.idHistorialSuscripcion = idHistorialSuscripcion;
         this.idUsuario = idUsuario;
         this.idMembresia = idMembresia;
@@ -70,11 +60,11 @@ public class HistorialSuscripcionesMembresias {
         this.idMembresia = idMembresia;
     }
 
-    public List<Suscripcion> getSuscripciones() {
+    public List<SuscripcionDTO> getSuscripciones() {
         return suscripciones;
     }
 
-    public void setSuscripciones(List<Suscripcion> suscripciones) {
+    public void setSuscripciones(List<SuscripcionDTO> suscripciones) {
         this.suscripciones = suscripciones;
     }
 
@@ -109,11 +99,4 @@ public class HistorialSuscripcionesMembresias {
     public void setFechaVencimiento(LocalDate fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
-
-    @Override
-    public String toString() {
-        return "HistorialSuscripcionesMembresias{" + "idHistorialSuscripcion=" + idHistorialSuscripcion + ", idUsuario=" + idUsuario + ", idMembresia=" + idMembresia + ", suscripciones=" + suscripciones + ", precioPagado=" + precioPagado + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", fechaVencimiento=" + fechaVencimiento + '}';
-    }
-    
-    
 }

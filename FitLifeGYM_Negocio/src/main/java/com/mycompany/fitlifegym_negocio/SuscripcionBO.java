@@ -8,6 +8,6 @@ package com.mycompany.fitlifegym_negocio;
  *
  * @author Jaime
  */
-public class ISuscripcionUsuarioMembresiaBO {
+public class SuscripcionBO {
     
 }

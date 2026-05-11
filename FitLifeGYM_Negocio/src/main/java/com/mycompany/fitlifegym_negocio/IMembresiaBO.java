@@ -10,13 +10,9 @@ import java.util.List;
 
 /**
  *
- * @author Diego
+ * @author Jaime
  */
 public interface IMembresiaBO {
 
-    public abstract void guardar(NuevaMembresiaDTO membresia) throws NegocioException;
-
-    public abstract List<Membresia> obtenerTodas() throws NegocioException;
-
-    public abstract Membresia obtenerPorId(Long id)throws NegocioException;
+  
 }

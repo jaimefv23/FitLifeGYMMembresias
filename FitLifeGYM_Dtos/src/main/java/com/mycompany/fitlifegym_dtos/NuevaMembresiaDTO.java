@@ -5,61 +5,88 @@
 package com.mycompany.fitlifegym_dtos;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
  * @author Diego
  */
 public class NuevaMembresiaDTO {
-    private Long idMembresia;
-    private TipoMembresiaDTO tipoMembresia;
-    private Double precio;
-    private LocalDate vigencia;
+    
+    private String nombre;
+    private Float precio;
+    private String estado;
+    private List<String> beneficios;
+    private ImagenDTO imagen;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
 
-    public NuevaMembresiaDTO(Long idMembresia, TipoMembresiaDTO tipoMembresia, Double precio, LocalDate vigencia) {
-        this.idMembresia = idMembresia;
-        this.tipoMembresia = tipoMembresia;
+    public NuevaMembresiaDTO() {
+    }
+
+    public NuevaMembresiaDTO(String nombre, Float precio, String estado, List<String> beneficios, ImagenDTO imagen, LocalDate fechaInicio, LocalDate fechaFin) {
+        this.nombre = nombre;
         this.precio = precio;
-        this.vigencia = vigencia;
+        this.estado = estado;
+        this.beneficios = beneficios;
+        this.imagen = imagen;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
-    public NuevaMembresiaDTO(TipoMembresiaDTO tipoMembresia, Double precio, LocalDate vigencia) {
-        this.tipoMembresia = tipoMembresia;
-        this.precio = precio;
-        this.vigencia = vigencia;
+    public String getNombre() {
+        return nombre;
     }
 
-    public Long getIdMembresia() {
-        return idMembresia;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setIdMembresia(Long idMembresia) {
-        this.idMembresia = idMembresia;
-    }
-
-    public TipoMembresiaDTO getTipoMembresia() {
-        return tipoMembresia;
-    }
-
-    public void setTipoMembresia(TipoMembresiaDTO tipoMembresia) {
-        this.tipoMembresia = tipoMembresia;
-    }
-
-    public Double getPrecio() {
+    public Float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(Float precio) {
         this.precio = precio;
     }
 
-    public LocalDate getVigencia() {
-        return vigencia;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setVigencia(LocalDate vigencia) {
-        this.vigencia = vigencia;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
-    
-    
+
+    public List<String> getBeneficios() {
+        return beneficios;
+    }
+
+    public void setBeneficios(List<String> beneficios) {
+        this.beneficios = beneficios;
+    }
+
+    public ImagenDTO getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(ImagenDTO imagen) {
+        this.imagen = imagen;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
+    }
 }
