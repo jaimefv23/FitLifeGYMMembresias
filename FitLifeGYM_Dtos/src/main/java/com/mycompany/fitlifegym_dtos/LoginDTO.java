@@ -8,18 +8,16 @@ package com.mycompany.fitlifegym_dtos;
  *
  * @author Jaime
  */
-public class NuevoUsuarioDTO {
-    
+public class LoginDTO {
+   
     private String nombre;
-    private String correo;
     private String contrasenia;
 
-    public NuevoUsuarioDTO() {
+    public LoginDTO() {
     }
 
-    public NuevoUsuarioDTO(String nombre, String correo, String contrasenia) {
+    public LoginDTO(String nombre, String contrasenia) {
         this.nombre = nombre;
-        this.correo = correo;
         this.contrasenia = contrasenia;
     }
 
@@ -31,19 +29,11 @@ public class NuevoUsuarioDTO {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
     public String getContrasenia() {
         return contrasenia;
     }
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
-    } 
+    }
 }

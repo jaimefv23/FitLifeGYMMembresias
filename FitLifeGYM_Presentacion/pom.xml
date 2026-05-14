@@ -12,34 +12,39 @@
             <version>RELEASE280</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>FitLifeGYM_Persistencia</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>FitLifeGYM_Negocio</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.mycompany</groupId>
             <artifactId>FitLifeGYM_Dtos</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>FuncionalidadComprarMembresiaUsuarioNoRegistrado</artifactId>
+            <groupId>com.mycompany</groupId>
+            <artifactId>FitLifeGYM_Negocio</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>FuncionalidadIniciarSesionRenovarMembresia</artifactId>
+            <groupId>com.mycompany</groupId>
+            <artifactId>FitLifeGYM_Persistencia</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>FitLifeGYM_Login</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>FitLifeGYM_GestionMembresias</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>FitLifeGYM_SeleccionarMembresia</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <exec.mainClass>com.mycompany.fitlifegym_presentacion.FitLifeGYM_Presentacion</exec.mainClass>
+        <exec.mainClass>Arranque.Iniciar</exec.mainClass>
     </properties>
 </project>
