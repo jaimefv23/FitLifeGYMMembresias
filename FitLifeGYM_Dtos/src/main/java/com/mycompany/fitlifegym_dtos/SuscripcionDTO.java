@@ -12,9 +12,9 @@ import java.time.LocalDate;
  */
 public class SuscripcionDTO {
     
-    private Long idSuscripcion;
-    private Long idUsuario;
-    private Long idMembresia;
+    private String idSuscripcion;
+    private String idUsuario;
+    private String idMembresia;
     private Float precioPagado;
     private LocalDate fechaInicio;
     private LocalDate fechaVencimiento;
@@ -23,7 +23,7 @@ public class SuscripcionDTO {
     public SuscripcionDTO() {
     }
 
-    public SuscripcionDTO(Long idSuscripcion, Long idUsuario, Long idMembresia, Float precioPagado, LocalDate fechaInicio, LocalDate fechaVencimiento, String estado) {
+    public SuscripcionDTO(String idSuscripcion, String idUsuario, String idMembresia, Float precioPagado, LocalDate fechaInicio, LocalDate fechaVencimiento, String estado) {
         this.idSuscripcion = idSuscripcion;
         this.idUsuario = idUsuario;
         this.idMembresia = idMembresia;
@@ -33,27 +33,27 @@ public class SuscripcionDTO {
         this.estado = estado;
     }
 
-    public Long getIdSuscripcion() {
+    public String getIdSuscripcion() {
         return idSuscripcion;
     }
 
-    public void setIdSuscripcion(Long idSuscripcion) {
+    public void setIdSuscripcion(String idSuscripcion) {
         this.idSuscripcion = idSuscripcion;
     }
 
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdMembresia() {
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 

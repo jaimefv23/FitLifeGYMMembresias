@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class HistorialSuscripcionesDTO {
     
-    private Long idHistorialSuscripcion;
-    private Long idUsuario;
-    private Long idMembresia;
+    private String idHistorialSuscripcion;
+    private String idUsuario;
+    private String idMembresia;
     private List<SuscripcionDTO> suscripciones;
     private Float precioPagado;
     private LocalDate fechaInicio;
@@ -25,7 +25,7 @@ public class HistorialSuscripcionesDTO {
     public HistorialSuscripcionesDTO() {
     }
 
-    public HistorialSuscripcionesDTO(Long idHistorialSuscripcion, Long idUsuario, Long idMembresia, List<SuscripcionDTO> suscripciones, Float precioPagado, LocalDate fechaInicio, LocalDate fechaFin, LocalDate fechaVencimiento) {
+    public HistorialSuscripcionesDTO(String idHistorialSuscripcion, String idUsuario, String idMembresia, List<SuscripcionDTO> suscripciones, Float precioPagado, LocalDate fechaInicio, LocalDate fechaFin, LocalDate fechaVencimiento) {
         this.idHistorialSuscripcion = idHistorialSuscripcion;
         this.idUsuario = idUsuario;
         this.idMembresia = idMembresia;
@@ -36,27 +36,27 @@ public class HistorialSuscripcionesDTO {
         this.fechaVencimiento = fechaVencimiento;
     }
 
-    public Long getIdHistorialSuscripcion() {
+    public String getIdHistorialSuscripcion() {
         return idHistorialSuscripcion;
     }
 
-    public void setIdHistorialSuscripcion(Long idHistorialSuscripcion) {
+    public void setIdHistorialSuscripcion(String idHistorialSuscripcion) {
         this.idHistorialSuscripcion = idHistorialSuscripcion;
     }
 
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdMembresia() {
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 

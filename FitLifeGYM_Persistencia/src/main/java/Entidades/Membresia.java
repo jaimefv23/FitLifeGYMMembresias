@@ -15,7 +15,8 @@ public class Membresia {
     
     @BsonId
     @BsonRepresentation(BsonType.OBJECT_ID)
-    private Long idMembresia;
+    private String idMembresia;
+    
     private String nombre;
     private Imagen imagen;
     private Float precio;
@@ -36,7 +37,7 @@ public class Membresia {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Membresia(Long idMembresia, String nombre, Imagen imagen, Float precio, Estado estado, List<String> beneficios, LocalDate fechaCreacion, PeriodoMembresia periodo) {
+    public Membresia(String idMembresia, String nombre, Imagen imagen, Float precio, Estado estado, List<String> beneficios, LocalDate fechaCreacion, PeriodoMembresia periodo) {
         this.idMembresia = idMembresia;
         this.nombre = nombre;
         this.imagen = imagen;
@@ -49,11 +50,11 @@ public class Membresia {
 
     
 
-    public Long getIdMembresia() {
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 

@@ -11,18 +11,19 @@ package com.mycompany.fitlifegym_dtos;
 public class NuevoUsuarioDTO {
     
     private String nombre;
-    private String correo;
     private String contrasenia;
+    private String rol;
 
     public NuevoUsuarioDTO() {
     }
 
-    public NuevoUsuarioDTO(String nombre, String correo, String contrasenia) {
+    public NuevoUsuarioDTO(String nombre, String contrasenia, String rol) {
         this.nombre = nombre;
-        this.correo = correo;
         this.contrasenia = contrasenia;
+        this.rol = rol;
     }
 
+    
     public String getNombre() {
         return nombre;
     }
@@ -31,12 +32,12 @@ public class NuevoUsuarioDTO {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getRol() {
+        return rol;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public String getContrasenia() {

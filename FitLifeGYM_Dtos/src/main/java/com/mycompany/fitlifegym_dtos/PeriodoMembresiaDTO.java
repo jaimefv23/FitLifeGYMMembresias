@@ -12,8 +12,8 @@ import java.time.LocalDate;
  */
 public class PeriodoMembresiaDTO {
     
-    private Long idPeriodo;
-    private Long idMembresia;
+    private String idPeriodo;
+    private String idMembresia;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private Boolean vigente;
@@ -21,7 +21,7 @@ public class PeriodoMembresiaDTO {
     public PeriodoMembresiaDTO() {
     }
 
-    public PeriodoMembresiaDTO(Long idPeriodo, Long idMembresia, LocalDate fechaInicio, LocalDate fechaFin, Boolean vigente) {
+    public PeriodoMembresiaDTO(String idPeriodo, String idMembresia, LocalDate fechaInicio, LocalDate fechaFin, Boolean vigente) {
         this.idPeriodo = idPeriodo;
         this.idMembresia = idMembresia;
         this.fechaInicio = fechaInicio;
@@ -29,19 +29,19 @@ public class PeriodoMembresiaDTO {
         this.vigente = vigente;
     }
 
-    public Long getIdPeriodo() {
+    public String getIdPeriodo() {
         return idPeriodo;
     }
 
-    public void setIdPeriodo(Long idPeriodo) {
+    public void setIdPeriodo(String idPeriodo) {
         this.idPeriodo = idPeriodo;
     }
 
-    public Long getIdMembresia() {
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 

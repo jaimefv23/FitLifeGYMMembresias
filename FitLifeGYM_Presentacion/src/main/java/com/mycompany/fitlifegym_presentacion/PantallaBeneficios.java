@@ -7,8 +7,14 @@ package com.mycompany.fitlifegym_presentacion;
 import BOS.NegocioException;
 import com.mycompany.fitlifegym_dtos.MembresiaDTO;
 import ControlMembresias.ControlMembresias;
+import com.mycompany.fitlifegym_dtos.SuscripcionDTO;
+import java.awt.Color;
+import java.awt.Image;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -34,47 +40,95 @@ public class PantallaBeneficios extends javax.swing.JFrame {
 
     private void cargarMembresias() {
         try {
-            membresiasDisponibles = control.listarMembresiasActivas();
-            String[] nombres = new String[membresiasDisponibles.size()];
-            for (int i = 0; i < membresiasDisponibles.size(); i++) {
-                nombres[i] = membresiasDisponibles.get(i).getNombre();
+            SuscripcionDTO suscripcionActiva = control.obtenerSuscripcionActiva();
+
+            if (suscripcionActiva != null) {
+                MembresiaDTO membresiaActual = control.obtenerMembresiaActivaDeUsuario();
+                String nombreMembresia = membresiaActual != null ? membresiaActual.getNombre() : "Membresía Activa";
+
+                ComboBoxMembresia.setModel(new DefaultComboBoxModel<>(new String[]{"Membresía Actual: " + nombreMembresia}));
+
+                // Calcular días restantes
+                long diasRestantes = ChronoUnit.DAYS.between(LocalDate.now(),suscripcionActiva.getFechaVencimiento());
+                btnPrecio.setText(diasRestantes + " días restantes");
+                btnSuscribirse.setEnabled(false);
+
+                // Mostrar beneficios de su membresía actual
+                if (membresiaActual != null) {
+                    membresiaSeleccionada = membresiaActual;
+                    mostrarBeneficiosDe(membresiaActual.getBeneficios());
+                    mostrarImagenMembresia(membresiaActual);
+                }
+
+            } else {
+                // Usuario sin membresía — mostrar todas las disponibles
+                membresiasDisponibles = control.listarMembresiasActivas();
+
+                if (membresiasDisponibles == null || membresiasDisponibles.isEmpty()) {
+                    ComboBoxMembresia.setModel(new DefaultComboBoxModel<>(new String[]{"Sin membresías disponibles"}));
+                    btnSuscribirse.setEnabled(false);
+                    btnPrecio.setText("$0");
+                    return;
+                }
+
+                String[] nombres = new String[membresiasDisponibles.size()];
+                for (int i = 0; i < membresiasDisponibles.size(); i++) {
+                    nombres[i] = membresiasDisponibles.get(i).getNombre();
+                }
+                ComboBoxMembresia.setModel(new DefaultComboBoxModel<>(nombres));
+                btnSuscribirse.setEnabled(true);
+                actualizarBeneficios();
             }
-            ComboBoxMembresia.setModel(new DefaultComboBoxModel<>(nombres));
+
         } catch (NegocioException ex) {
-            JOptionPane.showMessageDialog(this, "Error al cargar membresías",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al cargar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void actualizarBeneficios() {
+        Object seleccionado = ComboBoxMembresia.getSelectedItem();
+        if (seleccionado == null) return;
+
         int index = ComboBoxMembresia.getSelectedIndex();
         if (index < 0 || membresiasDisponibles == null
                 || membresiasDisponibles.isEmpty()) return;
 
         membresiaSeleccionada = membresiasDisponibles.get(index);
+        mostrarBeneficiosDe(membresiaSeleccionada.getBeneficios());
+        btnPrecio.setText("$" + membresiaSeleccionada.getPrecio());
 
-        // Resetear checkboxes
+        mostrarImagenMembresia(membresiaSeleccionada);
+    }
+    
+    private void mostrarImagenMembresia(MembresiaDTO membresia) {
+        if (membresia.getImagen() != null && membresia.getImagen().getImagen() != null) {
+            ImageIcon original = new ImageIcon(membresia.getImagen().getImagen());
+            Image escalada = original.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+            lblImagen.setIcon(new ImageIcon(escalada));
+            lblImagen.setText("");
+        } else {
+            lblImagen.setIcon(null);
+            lblImagen.setText("Sin imagen");
+            lblImagen.setForeground(new Color(180, 180, 180));
+        }
+    }
+    
+    private void mostrarBeneficiosDe(List<String> beneficios) {
         checkBoxInstalaciones.setSelected(false);
         checkBoxNutricion.setSelected(false);
         checkBoxMusica.setSelected(false);
         checkBoxFisico.setSelected(false);
         checkBoxCursos.setSelected(false);
 
-        // Marcar beneficios según la membresía
-        List<String> beneficios = membresiaSeleccionada.getBeneficios();
-        if (beneficios != null) {
-            for (String b : beneficios) {
-                String bl = b.toLowerCase();
-                if (bl.contains("instalacion")) checkBoxInstalaciones.setSelected(true);
-                if (bl.contains("nutrici")) checkBoxNutricion.setSelected(true);
-                if (bl.contains("musical")) checkBoxMusica.setSelected(true);
-                if (bl.contains("progreso") || bl.contains("físico")) checkBoxFisico.setSelected(true);
-                if (bl.contains("curso")) checkBoxCursos.setSelected(true);
-            }
+        if (beneficios == null) return;
+        for (String b : beneficios) {
+            String bl = b.toLowerCase();
+            if (bl.contains("instalacion")) checkBoxInstalaciones.setSelected(true);
+            if (bl.contains("nutrici")) checkBoxNutricion.setSelected(true);
+            if (bl.contains("musical")) checkBoxMusica.setSelected(true);
+            if (bl.contains("progreso") || bl.contains("físico")) checkBoxFisico.setSelected(true);
+            if (bl.contains("curso")) checkBoxCursos.setSelected(true);
         }
-
-        // Mostrar precio
-        btnPrecio.setText("$" + membresiaSeleccionada.getPrecio());
     }
 
     /**
@@ -111,7 +165,9 @@ public class PantallaBeneficios extends javax.swing.JFrame {
         textAreaCentroNutricion = new javax.swing.JTextArea();
         lblPrecio = new javax.swing.JLabel();
         ComboBoxMembresia = new javax.swing.JComboBox<>();
+        btnVolver = new javax.swing.JButton();
         btnSuscribirse = new javax.swing.JButton();
+        lblImagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,7 +192,7 @@ public class PantallaBeneficios extends javax.swing.JFrame {
         jPanel.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, -1, 140));
 
         checkBoxCursos.addActionListener(this::checkBoxCursosActionPerformed);
-        jPanel.add(checkBoxCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, 20, 30));
+        jPanel.add(checkBoxCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 20, 30));
 
         jSeparator4.setBackground(new java.awt.Color(225, 6, 0));
         jSeparator4.setForeground(new java.awt.Color(225, 6, 0));
@@ -185,7 +241,7 @@ public class PantallaBeneficios extends javax.swing.JFrame {
         jPanel.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 950, -1));
 
         checkBoxFisico.addActionListener(this::checkBoxFisicoActionPerformed);
-        jPanel.add(checkBoxFisico, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 20, 30));
+        jPanel.add(checkBoxFisico, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 20, 30));
 
         jScrollPane4.setBorder(null);
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -251,11 +307,18 @@ public class PantallaBeneficios extends javax.swing.JFrame {
         jPanel.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 210, 40));
 
         ComboBoxMembresia.setBackground(new java.awt.Color(44, 44, 44));
-        ComboBoxMembresia.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        ComboBoxMembresia.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         ComboBoxMembresia.setForeground(new java.awt.Color(255, 255, 255));
-        ComboBoxMembresia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bronce", "Plata", "Oro" }));
         ComboBoxMembresia.addActionListener(this::ComboBoxMembresiaActionPerformed);
-        jPanel.add(ComboBoxMembresia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 560, 80));
+        jPanel.add(ComboBoxMembresia, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 460, 80));
+
+        btnVolver.setBackground(new java.awt.Color(102, 102, 102));
+        btnVolver.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnVolver.addActionListener(this::btnVolverActionPerformed);
+        jPanel.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 480, 187, 54));
 
         btnSuscribirse.setBackground(new java.awt.Color(255, 0, 51));
         btnSuscribirse.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
@@ -264,6 +327,7 @@ public class PantallaBeneficios extends javax.swing.JFrame {
         btnSuscribirse.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnSuscribirse.addActionListener(this::btnSuscribirseActionPerformed);
         jPanel.add(btnSuscribirse, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 390, 187, 54));
+        jPanel.add(lblImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 60, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -313,20 +377,20 @@ public class PantallaBeneficios extends javax.swing.JFrame {
         actualizarBeneficios();
     }//GEN-LAST:event_ComboBoxMembresiaActionPerformed
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+
+            dispose();
+            control.mostrarPantallaBienvenida();
+      
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     private void btnSuscribirseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuscribirseActionPerformed
         if (membresiaSeleccionada == null) {
-            JOptionPane.showMessageDialog(this, "Selecciona una membresía",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecciona una membresía", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        try {
-            control.confirmarSuscripcion(membresiaSeleccionada.getIdMembresia());
-            dispose();
-            control.mostrarPantallaSuscripcionExitosa();
-        } catch (NegocioException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+        dispose();
+        control.mostrarPantallaConfirmarSuscripcion(membresiaSeleccionada);
     }//GEN-LAST:event_btnSuscribirseActionPerformed
 
   
@@ -342,6 +406,7 @@ public class PantallaBeneficios extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ComboBoxMembresia;
     private javax.swing.JButton btnPrecio;
     private javax.swing.JButton btnSuscribirse;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JCheckBox checkBoxCursos;
     private javax.swing.JCheckBox checkBoxFisico;
     private javax.swing.JCheckBox checkBoxInstalaciones;
@@ -358,6 +423,7 @@ public class PantallaBeneficios extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JLabel lblImagen;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextArea textAreaCentroNutricion;

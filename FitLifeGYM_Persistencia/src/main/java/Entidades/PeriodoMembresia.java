@@ -5,9 +5,7 @@
 package Entidades;
 
 import java.time.LocalDate;
-import org.bson.BsonType;
-import org.bson.codecs.pojo.annotations.BsonId;
-import org.bson.codecs.pojo.annotations.BsonRepresentation;
+
 
 /**
  *
@@ -15,10 +13,8 @@ import org.bson.codecs.pojo.annotations.BsonRepresentation;
  */
 public class PeriodoMembresia {
     
-    @BsonId
-    @BsonRepresentation(BsonType.OBJECT_ID)
-    private Long idPeriodo;
-    private Long idMembresia;
+    private String idPeriodo;
+    private String idMembresia;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private Boolean vigente;
@@ -26,14 +22,14 @@ public class PeriodoMembresia {
     public PeriodoMembresia() {
     }
 
-    public PeriodoMembresia(Long idMembresia, LocalDate fechaInicio, LocalDate fechaFin, Boolean vigente) {
+    public PeriodoMembresia(String idMembresia, LocalDate fechaInicio, LocalDate fechaFin, Boolean vigente) {
         this.idMembresia = idMembresia;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.vigente = vigente;
     }
 
-    public PeriodoMembresia(Long idPeriodo, Long idMembresia, LocalDate fechaInicio, LocalDate fechaFin, Boolean vigente) {
+    public PeriodoMembresia(String idPeriodo, String idMembresia, LocalDate fechaInicio, LocalDate fechaFin, Boolean vigente) {
         this.idPeriodo = idPeriodo;
         this.idMembresia = idMembresia;
         this.fechaInicio = fechaInicio;
@@ -41,19 +37,19 @@ public class PeriodoMembresia {
         this.vigente = vigente;
     }
 
-    public Long getIdPeriodo() {
+    public String getIdPeriodo() {
         return idPeriodo;
     }
 
-    public void setIdPeriodo(Long idPeriodo) {
+    public void setIdPeriodo(String idPeriodo) {
         this.idPeriodo = idPeriodo;
     }
 
-    public Long getIdMembresia() {
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 

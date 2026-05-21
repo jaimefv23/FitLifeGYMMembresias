@@ -17,9 +17,9 @@ public class Usuario {
     
     @BsonId
     @BsonRepresentation(BsonType.OBJECT_ID)
-    private Long idUsuario;
+    private String idUsuario;
+    
     private String nombre;
-    private String correo;
     private String contrasenia;
     private LocalDate fechaRegistro;
     private String rol;
@@ -27,28 +27,26 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String correo, String contrasenia, LocalDate fechaRegistro, String rol) {
+    public Usuario(String nombre, String contrasenia, LocalDate fechaRegistro, String rol) {
         this.nombre = nombre;
-        this.correo = correo;
         this.contrasenia = contrasenia;
         this.fechaRegistro = fechaRegistro;
         this.rol = rol;
     }
 
-    public Usuario(Long idUsuario, String nombre, String correo, String contrasenia, LocalDate fechaRegistro, String rol) {
+    public Usuario(String idUsuario, String nombre,String contrasenia, LocalDate fechaRegistro, String rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.correo = correo;
         this.contrasenia = contrasenia;
         this.fechaRegistro = fechaRegistro;
         this.rol = rol;
     }
 
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -60,13 +58,7 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
 
     public String getContrasenia() {
         return contrasenia;
@@ -94,7 +86,9 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", correo=" + correo + ", contrasenia=" + contrasenia + ", fechaRegistro=" + fechaRegistro + ", rol=" + rol + '}';
+        return "Usuario{" + "idUsuario=" + idUsuario + ", nombre=" + nombre + ", contrasenia=" + contrasenia + ", fechaRegistro=" + fechaRegistro + ", rol=" + rol + '}';
     }
+
+   
     
 }

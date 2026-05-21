@@ -10,7 +10,7 @@ package com.mycompany.fitlifegym_dtos;
  */
 public class ImagenDTO {
     
-    private Long idImagen;
+    private String nombre;
     private byte[] imagen;
     private Long tamanio;
 
@@ -22,18 +22,18 @@ public class ImagenDTO {
         this.tamanio = tamanio;
     }
 
-    public ImagenDTO(Long idImagen, byte[] imagen, Long tamanio) {
-        this.idImagen = idImagen;
+    public ImagenDTO(String nombre, byte[] imagen, Long tamanio) {
+        this.nombre = nombre;
         this.imagen = imagen;
         this.tamanio = tamanio;
     }
 
-    public Long getIdImagen() {
-        return idImagen;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setIdImagen(Long idImagen) {
-        this.idImagen = idImagen;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public byte[] getImagen() {

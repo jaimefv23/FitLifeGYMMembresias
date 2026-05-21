@@ -13,9 +13,10 @@ import java.util.List;
  */
 public class MembresiaDTO {
         
-    private Long idMembresia;
+    private String idMembresia;
     private String nombre;
     private Float precio;
+    private ImagenDTO imagen;
     private String estado;
     private List<String> beneficios;
     private LocalDate fechaCreacion;
@@ -23,15 +24,7 @@ public class MembresiaDTO {
     public MembresiaDTO() {
     }
 
-    public MembresiaDTO(String nombre, Float precio, String estado, List<String> beneficios, LocalDate fechaCreacion) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.estado = estado;
-        this.beneficios = beneficios;
-        this.fechaCreacion = fechaCreacion;
-    }
-
-    public MembresiaDTO(Long idMembresia, String nombre, Float precio, String estado, List<String> beneficios, LocalDate fechaCreacion) {
+    public MembresiaDTO(String idMembresia, String nombre, Float precio, String estado, List<String> beneficios, LocalDate fechaCreacion) {
         this.idMembresia = idMembresia;
         this.nombre = nombre;
         this.precio = precio;
@@ -39,12 +32,33 @@ public class MembresiaDTO {
         this.beneficios = beneficios;
         this.fechaCreacion = fechaCreacion;
     }
+    
+   
+    public MembresiaDTO(String idMembresia, String nombre, Float precio, ImagenDTO imagen, String estado, List<String> beneficios, LocalDate fechaCreacion) {
+        this.idMembresia = idMembresia;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.imagen = imagen;
+        this.estado = estado;
+        this.beneficios = beneficios;
+        this.fechaCreacion = fechaCreacion;
+    }
 
-    public Long getIdMembresia() {
+    public ImagenDTO getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(ImagenDTO imagen) {
+        this.imagen = imagen;
+    }
+
+    
+
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 

@@ -10,26 +10,24 @@ package com.mycompany.fitlifegym_dtos;
  */
 public class UsuarioDTO {
     
-    private Long idUsuario;
+    private String idUsuario;
     private String nombre;
-    private String correo;
     private String rol;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(Long idUsuario, String nombre, String correo, String rol) {
+    public UsuarioDTO(String idUsuario, String nombre, String rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.correo = correo;
         this.rol = rol;
     }
 
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -40,14 +38,6 @@ public class UsuarioDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    } 
 
     public String getRol() {
         return rol;

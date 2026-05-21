@@ -15,6 +15,10 @@ import FabricaDAO.FabricaDAO;
  */
 public class FabricaFachada {
    
+    /**
+     * Crea los tres DAOs con la FabricaDAO y los pasa en la Fachada.
+     * @return IFachada lista para ser usada por las BOs
+     */
      public static IFachada crearFachada() {
         IMembresiaDAO membresiaDAO = FabricaDAO.crearMembresiaDAO();
         ISuscripcionDAO suscripcionDAO = FabricaDAO.crearSuscripcionDAO();

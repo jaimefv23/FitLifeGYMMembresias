@@ -5,17 +5,14 @@
 package BOS;
 
 import Adapter.DtosAEntidadesAdapter;
-import Fachada.Fachada;
 import Fachada.IFachada;
 import com.mycompany.fitlifegym_dtos.MembresiaDTO;
 import com.mycompany.fitlifegym_dtos.NuevaSuscripcionDTO;
 import com.mycompany.fitlifegym_dtos.SuscripcionDTO;
-import DAOS.ISuscripcionDAO;
 import DAOS.PersistenciaException;
 import Entidades.Estado;
-import Entidades.HistorialSuscripcionesMembresias;
+import Entidades.HistorialSuscripcion;
 import Entidades.Suscripcion;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,12 +23,22 @@ public class SuscripcionBO implements ISuscripcionBO{
 
     private final IFachada fachada;
 
+    /**
+     * @param fachada Fachada de persistencia dada por FabricaBO
+     */
     public SuscripcionBO(IFachada fachada) {
         this.fachada = fachada;
     }
 
+    
+    /**
+     * Cuenta las suscripciones activas de una membresía.
+     * @param idMembresia ID de la membresía
+     * @return Número de suscripciones activas
+     * @throws NegocioException si falla la consulta
+     */
     @Override
-    public Integer contarActivasPorMembresia(Long idMembresia) throws NegocioException {
+    public Integer contarActivasPorMembresia(String idMembresia) throws NegocioException {
         try {
             return fachada.contarActivasPorMembresia(idMembresia);
         } catch (PersistenciaException e) {
@@ -39,19 +46,30 @@ public class SuscripcionBO implements ISuscripcionBO{
         }
     }
 
+    /**
+     * Devuelve las suscripciones activas de una membresía.
+     * @param  idMembresia ID de la membresía
+     * @return Lista de suscripciones activas
+     * @throws NegocioException si falla la consulta
+     */
     @Override
-    public List<SuscripcionDTO> obtenerActivasPorMembresia(Long idMembresia)
+    public List<SuscripcionDTO> obtenerActivasPorMembresia(String idMembresia)
             throws NegocioException {
         try {
-            return DtosAEntidadesAdapter.adaptarSuscripciones(
-                    fachada.obtenerSuscripcionesPorMembresia(idMembresia));
+            return DtosAEntidadesAdapter.adaptarSuscripciones(fachada.obtenerSuscripcionesPorMembresia(idMembresia));
         } catch (PersistenciaException e) {
             throw new NegocioException("Error al obtener suscripciones activas", e);
         }
     }
 
+    /**
+     * Verifica si un usuario tiene alguna suscripción activa.
+     * @param  idUsuario ID del usuario
+     * @return true si tiene suscripción activa
+     * @throws NegocioException si falla la consulta
+     */
     @Override
-    public Boolean verificarSuscripcionActiva(Long idUsuario) throws NegocioException {
+    public Boolean verificarSuscripcionActiva(String idUsuario) throws NegocioException {
         try {
             return fachada.obtenerSuscripcionActivaPorUsuario(idUsuario) != null;
         } catch (PersistenciaException e) {
@@ -59,16 +77,27 @@ public class SuscripcionBO implements ISuscripcionBO{
         }
     }
 
+    /**
+     * Obtiene la suscripción activa de un usuario.
+     * @param  idUsuario ID del usuario
+     * @return SuscripcionDTO activa o null si no tiene
+     * @throws NegocioException si falla la conslta
+     */
     @Override
-    public SuscripcionDTO obtenerActivaPorUsuario(Long idUsuario) throws NegocioException {
+    public SuscripcionDTO obtenerActivaPorUsuario(String idUsuario) throws NegocioException {
         try {
-            return DtosAEntidadesAdapter.adaptarSuscripcion(
-                    fachada.obtenerSuscripcionActivaPorUsuario(idUsuario));
+            return DtosAEntidadesAdapter.adaptarSuscripcion(fachada.obtenerSuscripcionActivaPorUsuario(idUsuario));
         } catch (PersistenciaException e) {
             throw new NegocioException("Error al obtener suscripción activa", e);
         }
     }
 
+    /**
+     * Registra una nueva suscripción con estado ACTIVA.
+     * @param  nuevaSuscripcionDTO DTO con idUsuario, idMembresia, fechas, precio y estado
+     * @return SuscripcionDTO registrada
+     * @throws NegocioException si falla la persistencia
+     */
     @Override
     public SuscripcionDTO registrar(NuevaSuscripcionDTO nuevaSuscripcionDTO)
             throws NegocioException {
@@ -80,35 +109,41 @@ public class SuscripcionBO implements ISuscripcionBO{
             suscripcion.setFechaVencimiento(nuevaSuscripcionDTO.getFechaVencimiento());
             suscripcion.setPrecioPagado(nuevaSuscripcionDTO.getPrecioPagado());
             suscripcion.setEstado(Estado.ACTIVA);
-            return DtosAEntidadesAdapter.adaptarSuscripcion(
-                    fachada.guardarSuscripcion(suscripcion));
+            return DtosAEntidadesAdapter.adaptarSuscripcion(fachada.guardarSuscripcion(suscripcion));
         } catch (PersistenciaException e) {
             throw new NegocioException("Error al registrar la suscripción", e);
         }
     }
 
+    /**
+     * Agrega la suscripción al historial embebido del documento.
+     * @param suscripcionDTO DTO de la suscripción a historizar
+     * @throws NegocioException si falla la insercción 
+     */
     @Override
     public void guardarEnHistorial(SuscripcionDTO suscripcionDTO) throws NegocioException {
         try {
-            HistorialSuscripcionesMembresias historial = new HistorialSuscripcionesMembresias();
-            historial.setIdUsuario(suscripcionDTO.getIdUsuario());
-            historial.setIdMembresia(suscripcionDTO.getIdMembresia());
-            historial.setPrecioPagado(suscripcionDTO.getPrecioPagado());
-            historial.setFechaInicio(suscripcionDTO.getFechaInicio());
-            historial.setFechaVencimiento(suscripcionDTO.getFechaVencimiento());
-
-            List<Suscripcion> lista = new ArrayList<>();
-            lista.add(DtosAEntidadesAdapter.adaptarSuscripcionDTO(suscripcionDTO));
-            historial.setSuscripciones(lista);
-
-            fachada.guardarHistorial(historial);
+            HistorialSuscripcion historial = new HistorialSuscripcion(
+                    suscripcionDTO.getIdMembresia(),
+                    suscripcionDTO.getFechaInicio(),
+                    suscripcionDTO.getFechaVencimiento(),
+                    suscripcionDTO.getPrecioPagado(),
+                    suscripcionDTO.getEstado()
+            );
+            fachada.agregarAlHistorial(suscripcionDTO.getIdUsuario(), historial);
         } catch (PersistenciaException e) {
             throw new NegocioException("Error al guardar en historial", e);
         }
     }
 
+    /**
+     * Obtiene la membresía activa de un Usuario.
+     * @param  idUsuario ID del usuario
+     * @return MembresiaDTO activa del usuario o null si no tiene
+     * @throws NegocioException si falla la consulta
+     */
     @Override
-    public MembresiaDTO obtenerMembresiaActivaDeUsuario(Long idUsuario) throws NegocioException {
+    public MembresiaDTO obtenerMembresiaActivaDeUsuario(String idUsuario) throws NegocioException {
             try {
             Suscripcion suscripcion = fachada.obtenerSuscripcionActivaPorUsuario(idUsuario);
             if (suscripcion == null) return null;

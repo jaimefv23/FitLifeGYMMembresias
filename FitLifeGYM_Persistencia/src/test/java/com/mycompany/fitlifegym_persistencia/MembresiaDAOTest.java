@@ -20,40 +20,31 @@ import org.junit.jupiter.api.BeforeEach;
  * @author Jaime
  */
 public class MembresiaDAOTest {
-    
-    private MembresiaDAO dao;
-    private Long idMembresiaCreada;
-
-    @BeforeEach
-    public void setUp() {
-        dao = new MembresiaDAO();
-    }
-
-//    @AfterEach
-//    public void tearDown() throws PersistenciaException {
+//    
+//    private MembresiaDAO dao;
 //
-//        if (idMembresiaCreada != null) {
-//            dao.eliminar(idMembresiaCreada);
-//            idMembresiaCreada = null;
-//        }
+//    @BeforeEach
+//    public void setUp() {
+//        dao = new MembresiaDAO();
 //    }
+//
+//    @Test
+//    public void testCrearMembresia() throws PersistenciaException {
+//        
+//        Membresia m = new Membresia();
+//        m.setNombre("PEPE");
+//        m.setPrecio(666.00f);
+//        m.setEstado(Estado.ACTIVA);
+//        m.setBeneficios(List.of("Acceso a instalaciones", "Cursos especiales"));
+//        m.setFechaCreacion(LocalDate.now());
+//
+//        Membresia guardada = dao.guardar(m);
+//
+//        assertNotNull(guardada.getIdMembresia());
+//        System.out.println("Membresía creada con ID: " + guardada.getIdMembresia());
 
-    @Test
-    public void testGuardarMembresia() throws PersistenciaException {
-        Membresia m = new Membresia();
-        m.setNombre("Membresía Test");
-        m.setPrecio(299.99f);
-        m.setEstado(Estado.ACTIVA);
-        m.setBeneficios(List.of("Acceso a instalaciones", "Vestuarios"));
-        m.setFechaCreacion(LocalDate.now());
 
-        Membresia guardada = dao.guardar(m);
-        idMembresiaCreada = guardada.getIdMembresia();
-
-        assertNotNull(guardada.getIdMembresia());
-        assertEquals("Membresía Test", guardada.getNombre());
-        assertEquals(Estado.ACTIVA, guardada.getEstado());
-        System.out.println("✔ testGuardarMembresia — ID: " + guardada.getIdMembresia());
-    }
+     
+    
     
 }

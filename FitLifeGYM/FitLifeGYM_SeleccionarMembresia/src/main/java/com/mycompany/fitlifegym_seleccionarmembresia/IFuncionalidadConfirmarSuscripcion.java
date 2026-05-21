@@ -14,7 +14,20 @@ import BOS.NegocioException;
  */
 public interface IFuncionalidadConfirmarSuscripcion {
     
-    public abstract SuscripcionDTO confirmarSuscripcion(NuevaSuscripcionDTO nuevaSuscripcionDTO) throws NegocioException;
+    /**
+     * Confirma la suscripción del usuario a la membresía seleccionada.
+     * Verifica que no tenga suscripción activa, que la membresía esté activa,
+     * registra la suscripción y la guarda en el historial.
+     * @param  idMembresia ID de la membresía seleccionada
+     * @param  idUsuario ID del usuario que se suscribe
+     * @return SuscripcionDTO con los datos de la suscripción registrada
+     * @throws NegocioException si ya tiene suscripción activa o la membresía no está disponible
+     */
+    public abstract SuscripcionDTO confirmarSuscripcion(String idMembresia, String idUsuario) throws NegocioException;
+    
+    /**
+     * Cancela el proceso. La navegación la maneja el ControlMembresias.
+     */
     public abstract void cancelarSuscripcion();
     
 }

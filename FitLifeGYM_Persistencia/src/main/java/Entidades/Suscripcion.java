@@ -5,6 +5,8 @@
 package Entidades;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.BsonType;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonRepresentation;
@@ -17,27 +19,32 @@ public class Suscripcion {
     
     @BsonId
     @BsonRepresentation(BsonType.OBJECT_ID)
-    private Long idSuscripcion;
-    private Long idUsuario;
-    private Long idMembresia;
+    private String idSuscripcion;
+    
+    private String idUsuario;
+    private String idMembresia;
     private LocalDate fechaInicio;
     private LocalDate fechaVencimiento;
     private Float precioPagado;
     private Estado estado;
+    private List<HistorialSuscripcion> historial;
 
     public Suscripcion() {
+        this.historial = new ArrayList<>();
     }
+    
 
-    public Suscripcion(Long idUsuario, Long idMembresia, LocalDate fechaInicio, LocalDate fechaVencimiento, Float precioPagado, Estado estado) {
+     public Suscripcion(String idUsuario, String idMembresia, Estado estado, LocalDate fechaInicio, LocalDate fechaVencimiento, Float precioPagado) {
         this.idUsuario = idUsuario;
         this.idMembresia = idMembresia;
+        this.estado = estado;
         this.fechaInicio = fechaInicio;
         this.fechaVencimiento = fechaVencimiento;
         this.precioPagado = precioPagado;
-        this.estado = estado;
+        this.historial = new ArrayList<>();
     }
 
-    public Suscripcion(Long idSuscripcion, Long idUsuario, Long idMembresia, LocalDate fechaInicio, LocalDate fechaVencimiento, Float precioPagado, Estado estado) {
+    public Suscripcion(String idSuscripcion, String idUsuario, String idMembresia, LocalDate fechaInicio, LocalDate fechaVencimiento, Float precioPagado, Estado estado) {
         this.idSuscripcion = idSuscripcion;
         this.idUsuario = idUsuario;
         this.idMembresia = idMembresia;
@@ -45,29 +52,30 @@ public class Suscripcion {
         this.fechaVencimiento = fechaVencimiento;
         this.precioPagado = precioPagado;
         this.estado = estado;
+        this.historial = new ArrayList<>();
     }
 
-    public Long getIdSuscripcion() {
+    public String getIdSuscripcion() {
         return idSuscripcion;
     }
 
-    public void setIdSuscripcion(Long idSuscripcion) {
+    public void setIdSuscripcion(String idSuscripcion) {
         this.idSuscripcion = idSuscripcion;
     }
 
-    public Long getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public Long getIdMembresia() {
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 
@@ -103,8 +111,20 @@ public class Suscripcion {
         this.estado = estado;
     }
 
+    public List<HistorialSuscripcion> getHistorial() {
+        return historial;
+    }
+
+    public void setHistorial(List<HistorialSuscripcion> historial) {
+        this.historial = historial;
+    }
+
     @Override
     public String toString() {
-        return "SuscripcionUsuarioMembresia{" + "idSuscripcion=" + idSuscripcion + ", idUsuario=" + idUsuario + ", idMembresia=" + idMembresia + ", fechaInicio=" + fechaInicio + ", fechaVencimiento=" + fechaVencimiento + ", precioPagado=" + precioPagado + ", estado=" + estado + '}';
+        return "Suscripcion{" + "idSuscripcion=" + idSuscripcion + ", idUsuario=" + idUsuario + ", idMembresia=" + idMembresia + ", fechaInicio=" + fechaInicio + ", fechaVencimiento=" + fechaVencimiento + ", precioPagado=" + precioPagado + ", estado=" + estado + ", historial=" + historial + '}';
     }
+    
+    
+
+    
 }

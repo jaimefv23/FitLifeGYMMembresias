@@ -127,10 +127,8 @@ public class PantallaSuscripcionExitosa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        btnVolver.addActionListener(e -> {
-            dispose();
-            control.mostrarPantallaBienvenida();
-        });
+        dispose();
+        control.mostrarPantallaBienvenida();
     }//GEN-LAST:event_btnVolverActionPerformed
 
     

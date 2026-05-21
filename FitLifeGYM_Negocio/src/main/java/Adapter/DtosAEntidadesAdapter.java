@@ -16,6 +16,7 @@ import Entidades.Membresia;
 import Entidades.PeriodoMembresia;
 import Entidades.Suscripcion;
 import Entidades.Usuario;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,15 +29,25 @@ public class DtosAEntidadesAdapter {
     // ══ Membresia ══
 
     public static MembresiaDTO adaptarMembresia(Membresia m) {
-        if (m == null) return null;
-        return new MembresiaDTO(
-                m.getIdMembresia(),
-                m.getNombre(),
-                m.getPrecio(),
-                m.getEstado().name(),
-                m.getBeneficios(),
-                m.getFechaCreacion()
+        if (m == null) 
+            return null;
+        MembresiaDTO dto = new MembresiaDTO(
+            m.getIdMembresia(),
+            m.getNombre(),
+            m.getPrecio(),
+            m.getEstado().name(),
+            m.getBeneficios(),
+            m.getFechaCreacion()
         );
+        if (m.getImagen() != null) {
+            ImagenDTO imagenDTO = new ImagenDTO(
+                    m.getImagen().getImagen(),
+                    m.getImagen().getTamanio()
+            );
+            dto.setImagen(imagenDTO);
+        }
+        return dto;
+        
     }
 
     public static List<MembresiaDTO> adaptarMembresias(List<Membresia> membresias) {
@@ -63,7 +74,8 @@ public class DtosAEntidadesAdapter {
     // ══ Suscripcion ══
 
     public static SuscripcionDTO adaptarSuscripcion(Suscripcion s) {
-        if (s == null) return null;
+        if (s == null) 
+            return null;
         return new SuscripcionDTO(
                 s.getIdSuscripcion(),
                 s.getIdUsuario(),
@@ -103,29 +115,22 @@ public class DtosAEntidadesAdapter {
         return new UsuarioDTO(
                 u.getIdUsuario(),
                 u.getNombre(),
-                u.getCorreo(),
                 u.getRol()
         );
     }
 
     // ══ Reporte ══
 
-    public static ReporteMembresiaDTO adaptarReporte(
-            int totalUsuarios, double totalVentas,
-            String tipo,
-            java.time.LocalDate fechaInicio,
-            java.time.LocalDate fechaFin) {
-        return new ReporteMembresiaDTO(
-                null, null, tipo,
-                fechaInicio, fechaFin,
-                totalUsuarios, totalVentas,
-                java.time.LocalDate.now()
-        );
+    public static ReporteMembresiaDTO adaptarReporte(int totalUsuarios, double totalVentas,String tipo, LocalDate fechaInicio, LocalDate fechaFin) {
+        return new ReporteMembresiaDTO(null, null, tipo,fechaInicio, fechaFin,totalUsuarios, totalVentas, LocalDate.now(), null);
     }
     
-    public static Imagen adaptarImagenDTO(ImagenDTO imagenDTO) {
+    // == Imagen ==
+    public static Imagen adaptarImagenDTO(ImagenDTO dto) {
+        if (dto == null) return null;
         Imagen imagen = new Imagen();
-        imagen.setImagen(imagenDTO.getImagen());
+        imagen.setImagen(dto.getImagen());
+        imagen.setTamanio(dto.getTamanio());
         return imagen;
     }
     

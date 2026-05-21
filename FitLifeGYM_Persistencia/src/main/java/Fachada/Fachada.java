@@ -11,7 +11,7 @@ import DAOS.MembresiaDAO;
 import DAOS.PersistenciaException;
 import DAOS.SuscripcionDAO;
 import DAOS.UsuarioDAO;
-import Entidades.HistorialSuscripcionesMembresias;
+import Entidades.HistorialSuscripcion;
 import Entidades.Membresia;
 import Entidades.PeriodoMembresia;
 import Entidades.Suscripcion;
@@ -47,7 +47,7 @@ public class Fachada implements IFachada{
     }
     
     @Override
-    public Membresia obtenerMembresiaPorId(Long id) throws PersistenciaException { 
+    public Membresia obtenerMembresiaPorId(String id) throws PersistenciaException { 
         return membresiaDAO.obtenerPorId(id); 
     }
     
@@ -62,50 +62,50 @@ public class Fachada implements IFachada{
     }
     
     @Override 
-    public Boolean eliminarMembresia(Long id) throws PersistenciaException { 
+    public Boolean eliminarMembresia(String id) throws PersistenciaException { 
         return membresiaDAO.eliminar(id); 
     }
 
     // Periodo
     @Override 
-    public PeriodoMembresia obtenerPeriodoPorMembresia(Long id) throws PersistenciaException { 
+    public PeriodoMembresia obtenerPeriodoPorMembresia(String id) throws PersistenciaException { 
         return membresiaDAO.obtenerPeriodoPorMembresia(id); 
     }
     
     @Override 
-    public PeriodoMembresia guardarPeriodo(Long id, LocalDate fi, LocalDate ff) throws PersistenciaException {
+    public PeriodoMembresia guardarPeriodo(String id, LocalDate fi, LocalDate ff) throws PersistenciaException {
         return membresiaDAO.guardarPeriodo(id, fi, ff);
     }
     
     @Override
     
-    public PeriodoMembresia editarPeriodo(Long id, LocalDate fi, LocalDate ff) throws PersistenciaException { 
+    public PeriodoMembresia editarPeriodo(String id, LocalDate fi, LocalDate ff) throws PersistenciaException { 
         return membresiaDAO.editarPeriodo(id, fi, ff); 
     }
     
     @Override 
-    public Boolean estaVigente(Long id) throws PersistenciaException { 
+    public Boolean estaVigente(String id) throws PersistenciaException { 
         return membresiaDAO.estaVigente(id); 
     }
 
     // Suscripcion
     @Override 
-    public Integer contarActivasPorMembresia(Long id) throws PersistenciaException {
+    public Integer contarActivasPorMembresia(String id) throws PersistenciaException {
         return suscripcionDAO.contarActivasPorMembresia(id); 
     }
     
     @Override 
-    public List<Suscripcion> obtenerSuscripcionesPorMembresia(Long id) throws PersistenciaException { 
+    public List<Suscripcion> obtenerSuscripcionesPorMembresia(String id) throws PersistenciaException { 
         return suscripcionDAO.obtenerPorMembresia(id); 
     }
     
     @Override 
-    public Suscripcion obtenerSuscripcionActivaPorUsuario(Long id) throws PersistenciaException { 
+    public Suscripcion obtenerSuscripcionActivaPorUsuario(String id) throws PersistenciaException { 
         return suscripcionDAO.obtenerActivaPorUsuario(id); 
     }
     
     @Override 
-    public Boolean existeSuscripcionActiva(Long idU, Long idM) throws PersistenciaException { 
+    public Boolean existeSuscripcionActiva(String idU, String idM) throws PersistenciaException { 
         return suscripcionDAO.existeActiva(idU, idM); 
     }
     
@@ -114,30 +114,19 @@ public class Fachada implements IFachada{
         return suscripcionDAO.guardar(s); 
     }
 
-    // Historial
     @Override
-    public List<HistorialSuscripcionesMembresias> obtenerTodoHistorial() throws PersistenciaException { 
-        return suscripcionDAO.obtenerTodoHistorial(); 
+    public Suscripcion agregarAlHistorial(String idUsuario, HistorialSuscripcion historial) throws PersistenciaException {
+        return suscripcionDAO.agregarAlHistorial(idUsuario, historial);
     }
-    
-    @Override 
-    public List<HistorialSuscripcionesMembresias> obtenerHistorialPorMembresia(Long id) throws PersistenciaException { 
-        return suscripcionDAO.obtenerHistorialPorMembresia(id);
-    }
-    
-    @Override 
-    public List<HistorialSuscripcionesMembresias> obtenerHistorialPorPeriodo(LocalDate fi, LocalDate ff) throws PersistenciaException { 
-        return suscripcionDAO.obtenerHistorialPorPeriodo(fi, ff); 
-    }
-    
-    @Override 
-    public HistorialSuscripcionesMembresias guardarHistorial(HistorialSuscripcionesMembresias h) throws PersistenciaException { 
-        return suscripcionDAO.guardarHistorial(h); 
+
+    @Override
+    public List<Suscripcion> obtenerHistorialPorPeriodo(LocalDate fechaInicio, LocalDate fechaFin) throws PersistenciaException {
+       return suscripcionDAO.obtenerHistorialPorPeriodo(fechaInicio, fechaFin);
     }
 
     // Usuario
     @Override 
-    public Usuario obtenerUsuarioPorId(Long id) throws PersistenciaException { 
+    public Usuario obtenerUsuarioPorId(String id) throws PersistenciaException { 
         return usuarioDAO.obtenerPorId(id); 
     }
     @Override 
@@ -152,5 +141,6 @@ public class Fachada implements IFachada{
     public Boolean validarCredenciales(String n, String c) throws PersistenciaException {
         return usuarioDAO.validarCredenciales(n, c); 
     }
+
     
 }

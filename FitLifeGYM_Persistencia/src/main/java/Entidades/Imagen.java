@@ -4,9 +4,6 @@
  */
 package Entidades;
 
-import org.bson.BsonType;
-import org.bson.codecs.pojo.annotations.BsonId;
-import org.bson.codecs.pojo.annotations.BsonRepresentation;
 
 /**
  *
@@ -14,28 +11,29 @@ import org.bson.codecs.pojo.annotations.BsonRepresentation;
  */
 public class Imagen {
     
-    @BsonId
-    @BsonRepresentation(BsonType.OBJECT_ID)
-    private Long idImagen;
-    private byte[] imagen;    
+    private String idImagen;
+    private byte[] imagen;  
+    private Long tamanio;
     
     public Imagen() {
     }
 
-    public Imagen(byte[] imagen) {
+    public Imagen(byte[] imagen, Long tamanio) {
         this.imagen = imagen;
+        this.tamanio = tamanio;
     }
 
-    public Imagen(Long idImagen, byte[] imagen) {
+    public Imagen(String idImagen, byte[] imagen, Long tamanio) {
         this.idImagen = idImagen;
         this.imagen = imagen;
+        this.tamanio = tamanio;
     }
 
-    public Long getIdImagen() {
+    public String getIdImagen() {
         return idImagen;
     }
 
-    public void setIdImagen(Long idImagen) {
+    public void setIdImagen(String idImagen) {
         this.idImagen = idImagen;
     }
 
@@ -46,6 +44,16 @@ public class Imagen {
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
+
+    public Long getTamanio() {
+        return tamanio;
+    }
+
+    public void setTamanio(Long tamanio) {
+        this.tamanio = tamanio;
+    }
+    
+    
 
     @Override
     public String toString() {

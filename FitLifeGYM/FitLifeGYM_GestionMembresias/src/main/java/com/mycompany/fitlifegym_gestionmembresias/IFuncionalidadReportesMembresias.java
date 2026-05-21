@@ -14,8 +14,24 @@ import BOS.NegocioException;
  */
 public interface IFuncionalidadReportesMembresias {
     
-//    public abstract ReporteMembresiaDTO generarReporteGeneral() throws NegocioException;
-//    public abstract ReporteMembresiaDTO generarReportePorPeriodo(FiltrosReportesDTO filtros) throws NegocioException;
-//    public abstract Boolean exportarReportePDF(ReporteMembresiaDTO reporte) throws NegocioException;
+    /**
+     * Genera un reporte general con todas las membresías y sus suscriptores.
+     * @throws NegocioException si ocurre un error al generar el reporte
+     */
+    public abstract ReporteMembresiaDTO generarReporteGeneral() throws NegocioException;
     
+    /**
+     * Genera un reporte filtrado por período de fechas.
+     * @param  filtros fechas de inicio y fin del período
+     * @throws NegocioException si las fechas son nulas o inválidas
+     */
+    public abstract ReporteMembresiaDTO generarReportePorPeriodo(FiltrosReportesDTO filtros) throws NegocioException;
+    
+    /**
+     * Exporta un reporte a formato PDF.
+     * @param  reporte datos del reporte a exportar
+     * @return true si el PDF fue generado correctamente
+     * @throws NegocioException si el reporte es nulo
+     */
+    public abstract Boolean exportarReportePDF(ReporteMembresiaDTO reporte) throws NegocioException;
 }

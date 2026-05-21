@@ -5,6 +5,7 @@
 package com.mycompany.fitlifegym_dtos;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -12,19 +13,20 @@ import java.time.LocalDate;
  */
 public class ReporteMembresiaDTO {
     
-    private Long idReporte;
-    private Long idMembresia;
+    private String idReporte;
+    private String idMembresia;
     private String tipo;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private Integer totalUsuarios;
     private Double totalVentas;
     private LocalDate fechaGeneracion;
+    private List<EntradaReporteDTO> membresias;
 
     public ReporteMembresiaDTO() {
     }
 
-    public ReporteMembresiaDTO(Long idReporte, Long idMembresia, String tipo, LocalDate fechaInicio, LocalDate fechaFin, Integer totalUsuarios, Double totalVentas, LocalDate fechaGeneracion) {
+    public ReporteMembresiaDTO(String idReporte, String idMembresia, String tipo, LocalDate fechaInicio, LocalDate fechaFin, Integer totalUsuarios, Double totalVentas, LocalDate fechaGeneracion, List<EntradaReporteDTO> membresias) {
         this.idReporte = idReporte;
         this.idMembresia = idMembresia;
         this.tipo = tipo;
@@ -33,21 +35,24 @@ public class ReporteMembresiaDTO {
         this.totalUsuarios = totalUsuarios;
         this.totalVentas = totalVentas;
         this.fechaGeneracion = fechaGeneracion;
+        this.membresias = membresias;
     }
 
-    public Long getIdReporte() {
+    
+
+    public String getIdReporte() {
         return idReporte;
     }
 
-    public void setIdReporte(Long idReporte) {
+    public void setIdReporte(String idReporte) {
         this.idReporte = idReporte;
     }
 
-    public Long getIdMembresia() {
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 
@@ -98,4 +103,14 @@ public class ReporteMembresiaDTO {
     public void setFechaGeneracion(LocalDate fechaGeneracion) {
         this.fechaGeneracion = fechaGeneracion;
     } 
+
+    public List<EntradaReporteDTO> getMembresias() {
+        return membresias;
+    }
+
+    public void setMembresias(List<EntradaReporteDTO> membresias) {
+        this.membresias = membresias;
+    }
+    
+    
 }

@@ -19,14 +19,26 @@ import DAOS.UsuarioDAO;
  */
 public class FabricaDAO {
     
+    /**
+     * Crea una nueva instancia de MembresiaDAO.
+     * @return IMembresiaDAO listo para usar
+     */
     public static IMembresiaDAO crearMembresiaDAO() {
         return new MembresiaDAO();
     }
 
+    /**
+     * Crea una nueva instancia de SuscripcionDAO.
+     * @return ISuscripcionDAO listo para usar
+     */
     public static ISuscripcionDAO crearSuscripcionDAO() {
         return new SuscripcionDAO();
     }
-
+    
+    /**
+     * Crea una nueva instancia de UsuarioDAO.
+     * @return IUsuarioDAO listo para usar
+     */
     public static IUsuarioDAO crearUsuarioDAO() {
         return new UsuarioDAO();
     }

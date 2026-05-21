@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class EditarMembresiaDTO {
     
-    private Long idMembresia;
+    private String idMembresia;
     private String nombre;
     private Float precio;
     private String estado;
@@ -24,7 +24,7 @@ public class EditarMembresiaDTO {
     public EditarMembresiaDTO() {
     }
 
-    public EditarMembresiaDTO(Long idMembresia, String nombre, Float precio, String estado, List<String> beneficios, LocalDate fechaInicio, LocalDate fechaFin) {
+    public EditarMembresiaDTO(String idMembresia, String nombre, Float precio, String estado, List<String> beneficios, LocalDate fechaInicio, LocalDate fechaFin) {
         this.idMembresia = idMembresia;
         this.nombre = nombre;
         this.precio = precio;
@@ -34,11 +34,11 @@ public class EditarMembresiaDTO {
         this.fechaFin = fechaFin;
     }
 
-    public Long getIdMembresia() {
+    public String getIdMembresia() {
         return idMembresia;
     }
 
-    public void setIdMembresia(Long idMembresia) {
+    public void setIdMembresia(String idMembresia) {
         this.idMembresia = idMembresia;
     }
 
